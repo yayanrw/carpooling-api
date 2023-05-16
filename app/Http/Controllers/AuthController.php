@@ -5,24 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
+use App\Traits\HttpResponses;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    use HttpResponses;
     public function register(StoreUserRequest $storeUserRequest)
     {
         try {
             $storeUserRequest->validated($storeUserRequest->all());
-
             $user = User::create([
                 'name' => $storeUserRequest->name,
                 'email' => $storeUserRequest->email,
                 'password' => Hash::make($storeUserRequest->password),
                 'role' => $storeUserRequest->role,
             ]);
-
             return $this->success([
                 'user' => $user,
             ]);
