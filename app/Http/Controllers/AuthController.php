@@ -31,12 +31,10 @@ class AuthController extends Controller
         }
     }
 
-
-
     public function login(LoginUserRequest $loginUserRequest)
     {
         try {
-            $loginUserRequest->validate($loginUserRequest->all());
+            $loginUserRequest->validated($loginUserRequest->all());
 
             if (!Auth::attempt($loginUserRequest->only(['email', 'password']))) {
                 return $this->error(null, 'Email or Password is incorrect', 401);
@@ -44,7 +42,7 @@ class AuthController extends Controller
 
             $user = User::where('email', $loginUserRequest->email)->first();
 
-            if ($user->role == 'superuser') {
+            if ($user->role == 'superadmin') {
                 $abilities = [
                     ''
                 ];
