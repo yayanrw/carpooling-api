@@ -9,6 +9,7 @@ use App\Traits\HttpResponses;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -31,7 +32,7 @@ class AuthController extends Controller
         }
     }
 
-    public function login(LoginUserRequest $loginUserRequest)
+    public function logIn(LoginUserRequest $loginUserRequest)
     {
         try {
             $loginUserRequest->validated($loginUserRequest->all());
@@ -64,6 +65,18 @@ class AuthController extends Controller
                 'user' => $user,
                 'token' => $user->createToken($user->name . '\'s token', $abilities)->plainTextToken
             ]);
+        } catch (Exception $e) {
+            return $this->error(null, $e->getMessage(), 500);
+        }
+    }
+
+    public function logOut(Request $request)
+    {
+        try {
+            $user = $request->user();
+            $user->tokens()->delete();
+
+            return $this->success(null, "Logout successfully");
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), 500);
         }
