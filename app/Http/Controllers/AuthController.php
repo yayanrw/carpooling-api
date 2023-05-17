@@ -23,6 +23,8 @@ class AuthController extends Controller
                 'email' => $storeUserRequest->email,
                 'password' => Hash::make($storeUserRequest->password),
                 'role' => $storeUserRequest->role,
+                'company_id' => $storeUserRequest->company_id,
+                'office_id' => $storeUserRequest->office_id,
             ]);
             return $this->success([
                 'user' => $user,
