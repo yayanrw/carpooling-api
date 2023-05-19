@@ -21,11 +21,13 @@ return new class extends Migration
             $table->boolean('is_serviced')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
         });
 
         Schema::table('t_service_schedule', function ($table) {
             $table->foreign('vehicle_id')->references('id')->on('m_vehicle')->onDelete('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
