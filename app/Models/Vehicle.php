@@ -43,7 +43,7 @@ class Vehicle extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function fuelConsumption(): HasMany
+    public function fuelConsumptions(): HasMany
     {
         return $this->hasMany(FuelConsumption::class);
     }
