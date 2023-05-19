@@ -139,4 +139,7 @@ class MyApp
     const HTTP_NETWORK_AUTHENTICATION_REQUIRED = 511;
 
     const DATA_NOT_FOUND = 'Data not found';
+    const DELETED_SUCCESSFULLY = 'Deleted successfully';
+    const INSERTED_SUCCESSFULLY = 'Inserted successfully';
+    const UPDATED_SUCCESSFULLY = 'Updated successfully';
 }
