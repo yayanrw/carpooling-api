@@ -81,6 +81,8 @@ class CompanyController extends Controller
             $company = Company::find($id);
 
             if (!empty($company)) {
+                $company->deleted_by = Auth::user()->id;
+                $company->save();
                 $company->delete();
 
                 return $this->success(null, MyApp::DELETED_SUCCESSFULLY);
