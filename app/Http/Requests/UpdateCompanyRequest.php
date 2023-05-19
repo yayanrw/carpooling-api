@@ -24,7 +24,6 @@ class UpdateCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'int'],
             'company_name' => ['required', 'string', 'unique:m_company,company_name']
         ];
     }
