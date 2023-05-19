@@ -45,39 +45,9 @@ class AuthController extends Controller
 
             $user = User::where('email', $loginUserRequest->email)->first();
 
-            if ($user->role == 'SUPERADMIN') {
-                $abilities = [
-                    'store-company'
-                ];
-            }
-
-            if ($user->role == 'ADMIN') {
-                $abilities = [
-                    'store-company'
-                ];
-            }
-
-            if ($user->role == 'APPROVER') {
-                $abilities = [
-                    ''
-                ];
-            }
-
-            if ($user->role == 'DRIVER') {
-                $abilities = [
-                    ''
-                ];
-            }
-
-            if ($user->role == 'ENDUSER') {
-                $abilities = [
-                    ''
-                ];
-            }
-
             return $this->success([
                 'user' => $user,
-                'token' => $user->createToken($user->name . '\'s token', $abilities)->plainTextToken
+                'token' => $user->createToken($user->name . '\'s token', [$user->role])->plainTextToken
             ]);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), 500);
