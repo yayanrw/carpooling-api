@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreCompanyRequest extends FormRequest
 {
@@ -26,7 +25,6 @@ class StoreCompanyRequest extends FormRequest
     {
         return [
             'company_name' => ['required'],
-            'created_by' => ['required', Rule::exists('users', 'id')],
         ];
     }
 }
