@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCompanyRequest;
-use App\Http\Requests\UpdateCompanyRequest;
+use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use App\MyApp;
 use App\Traits\HttpResponses;
@@ -24,13 +23,13 @@ class CompanyController extends Controller
         }
     }
 
-    public function store(StoreCompanyRequest $storeCompanyRequest)
+    public function store(CompanyRequest $companyRequest)
     {
         try {
-            $storeCompanyRequest->validated($storeCompanyRequest->all());
+            $companyRequest->validated($companyRequest->all());
 
             $company = Company::create([
-                'company_name' => $storeCompanyRequest->company_name,
+                'company_name' => $companyRequest->company_name,
                 'created_by' => Auth::user()->id,
             ]);
 
@@ -55,13 +54,13 @@ class CompanyController extends Controller
         }
     }
 
-    public function update(UpdateCompanyRequest $updateCompanyRequest, int $id)
+    public function update(CompanyRequest $companyRequest, int $id)
     {
         try {
             $company = Company::find($id);
 
             if (!empty($company)) {
-                $company->company_name = $updateCompanyRequest->company_name;
+                $company->company_name = $companyRequest->company_name;
                 $company->updated_by = Auth::user()->id;
 
                 $company->save();
