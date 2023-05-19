@@ -34,7 +34,7 @@ class CompanyController extends Controller
                 'created_by' => Auth::user()->id,
             ]);
 
-            return $this->success(['company' => $company]);
+            return $this->success($company, MyApp::INSERTED_SUCCESSFULLY);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -66,7 +66,7 @@ class CompanyController extends Controller
 
                 $company->save();
 
-                return $this->success($company);
+                return $this->success($company, MyApp::UPDATED_SUCCESSFULLY);
             } else {
                 return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
             }
