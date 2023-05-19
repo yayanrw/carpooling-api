@@ -29,7 +29,7 @@ class OfficeController extends Controller
             $officeRequest->validated($officeRequest->all());
 
             $office = Office::create([
-                'company_id' => $officeRequest->company_name,
+                'company_id' => $officeRequest->company_id,
                 'office_name' => $officeRequest->office_name,
                 'region' => $officeRequest->region,
                 'type' => $officeRequest->type,
