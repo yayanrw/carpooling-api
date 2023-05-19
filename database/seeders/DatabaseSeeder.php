@@ -23,5 +23,33 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make("Bismillah."),
             'role' => 'SUPERADMIN',
         ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'ADMIN',
+            'email' => 'admin@example.com',
+            'password' => Hash::make("Bismillah."),
+            'role' => 'ADMIN',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'APPROVER',
+            'email' => 'approver@example.com',
+            'password' => Hash::make("Bismillah."),
+            'role' => 'APPROVER',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'DRIVER',
+            'email' => 'driver@example.com',
+            'password' => Hash::make("Bismillah."),
+            'role' => 'DRIVER',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'name' => 'ENDUSER',
+            'email' => 'enduser@example.com',
+            'password' => Hash::make("Bismillah."),
+            'role' => 'ENDUSER',
+        ]);
     }
 }
