@@ -45,19 +45,31 @@ class AuthController extends Controller
 
             $user = User::where('email', $loginUserRequest->email)->first();
 
-            if ($user->role == 'superadmin') {
+            if ($user->role == 'SUPERADMIN') {
+                $abilities = [
+                    'store-company'
+                ];
+            }
+
+            if ($user->role == 'ADMIN') {
+                $abilities = [
+                    'store-company'
+                ];
+            }
+
+            if ($user->role == 'APPROVER') {
                 $abilities = [
                     ''
                 ];
             }
 
-            if ($user->role == 'admin') {
+            if ($user->role == 'DRIVER') {
                 $abilities = [
                     ''
                 ];
             }
 
-            if ($user->role == 'enduser') {
+            if ($user->role == 'ENDUSER') {
                 $abilities = [
                     ''
                 ];
