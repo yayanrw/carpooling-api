@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends Model
@@ -16,6 +17,11 @@ class Company extends Model
     protected $fillable = [
         'company_name', 'created_by', 'updated_by', 'deleted_by',
     ];
+
+    public function office(): HasMany
+    {
+        return $this->hasMany(Office::class);
+    }
 
     public function createdBy(): BelongsTo
     {
