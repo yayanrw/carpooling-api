@@ -30,5 +30,5 @@ Route::controller(AuthController::class)->group(function () {
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::post('/company', [CompanyController::class, 'store'])->middleware('ability:store-company');
+    Route::resource('/company', CompanyController::class);
 });
