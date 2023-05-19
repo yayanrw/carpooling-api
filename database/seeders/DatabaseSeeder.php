@@ -21,35 +21,35 @@ class DatabaseSeeder extends Seeder
             'name' => 'SUPERADMIN',
             'email' => 'superadmin@example.com',
             'password' => Hash::make("Bismillah."),
-            'role' => 'SUPERADMIN',
+            'role' => 'superadmin',
         ]);
 
         \App\Models\User::factory()->create([
             'name' => 'ADMIN',
             'email' => 'admin@example.com',
             'password' => Hash::make("Bismillah."),
-            'role' => 'ADMIN',
+            'role' => 'admin',
         ]);
 
         \App\Models\User::factory()->create([
             'name' => 'APPROVER',
             'email' => 'approver@example.com',
             'password' => Hash::make("Bismillah."),
-            'role' => 'APPROVER',
+            'role' => 'approver',
         ]);
 
         \App\Models\User::factory()->create([
             'name' => 'DRIVER',
             'email' => 'driver@example.com',
             'password' => Hash::make("Bismillah."),
-            'role' => 'DRIVER',
+            'role' => 'driver',
         ]);
 
         \App\Models\User::factory()->create([
             'name' => 'ENDUSER',
             'email' => 'enduser@example.com',
             'password' => Hash::make("Bismillah."),
-            'role' => 'ENDUSER',
+            'role' => 'enduser',
         ]);
     }
 }
