@@ -10,7 +10,7 @@ class FuelConsumption extends Model
 {
     use HasFactory;
 
-    protected $table = 't_fuel_consumtion';
+    protected $table = 't_fuel_consumption';
 
     protected $fillable = [
         'vehicle_id', 'date', 'litres', 'created_by'
