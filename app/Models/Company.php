@@ -18,6 +18,10 @@ class Company extends Model
         'company_name', 'created_by', 'updated_by', 'deleted_by',
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by', 'deleted_by',
+    ];
+
     public function offices(): HasMany
     {
         return $this->hasMany(Office::class);
