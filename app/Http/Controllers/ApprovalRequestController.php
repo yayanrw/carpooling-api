@@ -13,6 +13,11 @@ class ApprovalRequestController extends Controller
 {
     use HttpResponses;
 
+    public function __construct()
+    {
+        $this->middleware('ability:super_admin,admin')->only(['store', 'update']);
+    }
+
     public function index()
     {
         try {
