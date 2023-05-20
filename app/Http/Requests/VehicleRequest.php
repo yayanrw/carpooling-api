@@ -29,7 +29,7 @@ class VehicleRequest extends FormRequest
             'office_id' => ['required', Rule::exists('m_office', 'id')],
             'license_plate' => ['required', 'string', 'unique:m_vehicle,license_plate'],
             'hull_number' => ['required', 'string', 'unique:m_vehicle,hull_number'],
-            'type' => ['required', 'in:manhauling,goodshauling']
+            'type' => ['required', 'in:man_haul,goods_haul']
         ];
     }
 }
