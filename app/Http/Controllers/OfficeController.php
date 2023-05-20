@@ -47,58 +47,40 @@ class OfficeController extends Controller
         }
     }
 
-    public function show(int $id)
+    public function show(Office $office)
     {
         try {
-            $office = Office::find($id);
-
-            if (!empty($office)) {
-                return $this->success($office);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success($office);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    public function update(OfficeRequest $officeRequest, int $id)
+    public function update(OfficeRequest $officeRequest, Office $office)
     {
         try {
-            $office = Office::find($id);
+            $office->company_id = $officeRequest->company_id;
+            $office->office_name = $officeRequest->office_name;
+            $office->region = $officeRequest->region;
+            $office->type = $officeRequest->type;
+            $office->updated_by = Auth::user()->id;
 
-            if (!empty($office)) {
-                $office->company_id = $officeRequest->company_id;
-                $office->office_name = $officeRequest->office_name;
-                $office->region = $officeRequest->region;
-                $office->type = $officeRequest->type;
-                $office->updated_by = Auth::user()->id;
+            $office->save();
 
-                $office->save();
-
-                return $this->success($office, MyApp::UPDATED_SUCCESSFULLY);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success($office, MyApp::UPDATED_SUCCESSFULLY);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    public function destroy(int $id)
+    public function destroy(Office $office)
     {
         try {
-            $office = Office::find($id);
+            $office->deleted_by = Auth::user()->id;
+            $office->save();
+            $office->delete();
 
-            if (!empty($office)) {
-                $office->deleted_by = Auth::user()->id;
-                $office->save();
-                $office->delete();
-
-                return $this->success(null, MyApp::DELETED_SUCCESSFULLY);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success(null, MyApp::DELETED_SUCCESSFULLY);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
