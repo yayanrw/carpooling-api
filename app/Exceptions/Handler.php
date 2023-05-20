@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Laravel\Sanctum\Exceptions\MissingAbilityException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -56,6 +57,12 @@ class Handler extends ExceptionHandler
                 'status' => false,
                 'message' => 'Unauthorized access',
             ], 403);
+        }
+        if ($exception instanceof NotFoundHttpException) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Page not found',
+            ], 404);
         }
         return parent::render($request, $exception);
     }
