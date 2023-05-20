@@ -63,7 +63,7 @@ class ApprovalRequestController extends Controller
             if (!empty($approvalRequest)) {
                 $approvalRequest->note = $updateApprovalRequest->note;
                 $approvalRequest->is_approved = $updateApprovalRequest->is_approved;
-                $approvalRequest->approved_at = $updateApprovalRequest->approved_at;
+                $approvalRequest->approved_at = date('Y-m-d H:i:s');
 
                 $approvalRequest->save();
 
