@@ -16,6 +16,14 @@ class ApprovalRequest extends Model
         'vehicle_booking_id', 'approval_order', 'approval_user_id', 'note', 'is_approved', 'approved_at',
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at',
+    ];
+
+    protected $cast = [
+        'approved_at' => 'datetime'
+    ];
+
     public function vehicleBooking(): BelongsTo
     {
         return $this->belongsTo(VehicleBooking::class);
