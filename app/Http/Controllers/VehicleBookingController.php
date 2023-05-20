@@ -51,38 +51,26 @@ class VehicleBookingController extends Controller
         }
     }
 
-    public function show(int $id)
+    public function show(VehicleBooking $vehicleBooking)
     {
         try {
-            $vehicleBooking = VehicleBooking::find($id);
-
-            if (!empty($vehicleBooking)) {
-                return $this->success($vehicleBooking);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success($vehicleBooking);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    public function update(UpdateVehicleBookingRequest $updateVehicleBookingRequest, int $id)
+    public function update(UpdateVehicleBookingRequest $updateVehicleBookingRequest, VehicleBooking $vehicleBooking)
     {
         try {
-            $vehicleBooking = VehicleBooking::find($id);
+            $vehicleBooking->actual_start_date = $updateVehicleBookingRequest->actual_start_date;
+            $vehicleBooking->actual_completion_date = $updateVehicleBookingRequest->actual_completion_date;
+            $vehicleBooking->status = $updateVehicleBookingRequest->status;
+            $vehicleBooking->updated_by = Auth::user()->id;
 
-            if (!empty($vehicleBooking)) {
-                $vehicleBooking->actual_start_date = $updateVehicleBookingRequest->actual_start_date;
-                $vehicleBooking->actual_completion_date = $updateVehicleBookingRequest->actual_completion_date;
-                $vehicleBooking->status = $updateVehicleBookingRequest->status;
-                $vehicleBooking->updated_by = Auth::user()->id;
+            $vehicleBooking->save();
 
-                $vehicleBooking->save();
-
-                return $this->success($vehicleBooking, MyApp::UPDATED_SUCCESSFULLY);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success($vehicleBooking, MyApp::UPDATED_SUCCESSFULLY);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
