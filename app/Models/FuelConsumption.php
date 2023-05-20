@@ -16,6 +16,10 @@ class FuelConsumption extends Model
         'vehicle_id', 'date', 'litres', 'created_by'
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at', 'created_by',
+    ];
+
     public function vehicle(): BelongsTo
     {
         return $this->belongsTo(Vehicle::class);
