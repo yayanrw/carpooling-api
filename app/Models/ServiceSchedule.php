@@ -16,6 +16,10 @@ class ServiceSchedule extends Model
         'vehicle_id', 'estimation_date', 'actual_date', 'is_serviced', 'created_by', 'updated_by',
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at', 'created_by', 'updated_by',
+    ];
+
     public function vehicle(): BelongsTo
     {
         return $this->belongsTo(Vehicle::class);
