@@ -28,7 +28,7 @@ class OfficeRequest extends FormRequest
             'company_id' => ['required', Rule::exists('m_company', 'id')],
             'office_name' => ['required', 'string'],
             'region' => ['string'],
-            'type' => ['required', 'string', 'in:headoffice,supportoffice,jobsite'],
+            'type' => ['required', 'string', 'in:head_office,support_office,job_site'],
         ];
     }
 }
