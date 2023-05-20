@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('status')->default('REQUESTED');
             $table->timestamps();
             $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('updated_by');
         });
 
         Schema::table('t_vehicle_booking', function ($table) {
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->foreign('driver_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_request_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
