@@ -46,16 +46,10 @@ class FuelConsumptionController extends Controller
         }
     }
 
-    public function show(int $id)
+    public function show(FuelConsumption $fuelConsumption)
     {
         try {
-            $fuelConsumption = FuelConsumption::find($id);
-
-            if (!empty($fuelConsumption)) {
-                return $this->success($fuelConsumption);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success($fuelConsumption);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
