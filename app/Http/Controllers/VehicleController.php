@@ -48,59 +48,41 @@ class VehicleController extends Controller
         }
     }
 
-    public function show(int $id)
+    public function show(Vehicle $vehicle)
     {
         try {
-            $vehicle = Vehicle::find($id);
-
-            if (!empty($vehicle)) {
-                return $this->success($vehicle);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success($vehicle);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    public function update(VehicleRequest $vehicleRequest, int $id)
+    public function update(VehicleRequest $vehicleRequest, Vehicle $vehicle)
     {
         try {
-            $vehicle = Vehicle::find($id);
+            $vehicle->company_id = $vehicleRequest->company_id;
+            $vehicle->office_id = $vehicleRequest->office_id;
+            $vehicle->license_plate = $vehicleRequest->license_plate;
+            $vehicle->hull_number = $vehicleRequest->hull_number;
+            $vehicle->type = $vehicleRequest->type;
+            $vehicle->updated_by = Auth::user()->id;
 
-            if (!empty($vehicle)) {
-                $vehicle->company_id = $vehicleRequest->company_id;
-                $vehicle->office_id = $vehicleRequest->office_id;
-                $vehicle->license_plate = $vehicleRequest->license_plate;
-                $vehicle->hull_number = $vehicleRequest->hull_number;
-                $vehicle->type = $vehicleRequest->type;
-                $vehicle->updated_by = Auth::user()->id;
+            $vehicle->save();
 
-                $vehicle->save();
-
-                return $this->success($vehicle, MyApp::UPDATED_SUCCESSFULLY);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success($vehicle, MyApp::UPDATED_SUCCESSFULLY);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    public function destroy(int $id)
+    public function destroy(Vehicle $vehicle)
     {
         try {
-            $vehicle = Vehicle::find($id);
+            $vehicle->deleted_by = Auth::user()->id;
+            $vehicle->save();
+            $vehicle->delete();
 
-            if (!empty($vehicle)) {
-                $vehicle->deleted_by = Auth::user()->id;
-                $vehicle->save();
-                $vehicle->delete();
-
-                return $this->success(null, MyApp::DELETED_SUCCESSFULLY);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success(null, MyApp::DELETED_SUCCESSFULLY);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
