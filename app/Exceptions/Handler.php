@@ -9,6 +9,7 @@ use Laravel\Sanctum\Exceptions\MissingAbilityException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -55,6 +56,13 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
+        // die($exception);
+        if ($exception instanceof ValidationException) {
+            return response()->json([
+                'status' => false,
+                'message' => $exception->getMessage(),
+            ], MyApp::HTTP_UNPROCESSABLE_ENTITY);
+        }
         if ($exception instanceof ModelNotFoundException) {
             return response()->json([
                 'status' => false,
