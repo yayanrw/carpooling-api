@@ -35,4 +35,23 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('/company', CompanyController::class);
     Route::resource('/office', OfficeController::class);
     Route::resource('/vehicle', Vehicle::class);
+
+    Route::get('/approval-requests', [ApprovalRequestController::class, 'index']);
+    Route::get('/approval-requests/{approvalRequest}', [ApprovalRequestController::class, 'show']);
+    Route::post('/approval-requests', [ApprovalRequestController::class, 'store']);
+    Route::put('/approval-requests/{approvalRequest}', [ApprovalRequestController::class, 'update']);
+
+    Route::get('/fuel-consumptions', [FuelConsumptionController::class, 'index']);
+    Route::get('/fuel-consumptions/{fuelConsumption}', [FuelConsumptionController::class, 'show']);
+    Route::post('/fuel-consumptions', [FuelConsumptionController::class, 'store']);
+
+    Route::get('/service-schedules', [ServiceScheduleController::class, 'index']);
+    Route::get('/service-schedules/{serviceSchedule}', [ServiceScheduleController::class, 'show']);
+    Route::post('/service-schedules', [ServiceScheduleController::class, 'store']);
+    Route::put('/service-schedules/{serviceSchedule}', [ServiceScheduleController::class, 'update']);
+
+    Route::get('/vehicle-bookings', [VehicleBookingController::class, 'index']);
+    Route::get('/vehicle-bookings/{vehicleBooking}', [VehicleBookingController::class, 'show']);
+    Route::post('/vehicle-bookings', [VehicleBookingController::class, 'store']);
+    Route::put('/vehicle-bookings/{vehicleBooking}', [VehicleBookingController::class, 'update']);
 });
