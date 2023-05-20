@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\OfficeController;
+use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::resource('/company', CompanyController::class);
     Route::resource('/office', OfficeController::class);
+    Route::resource('/vehicle', Vehicle::class);
 });
