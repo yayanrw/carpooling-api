@@ -27,6 +27,17 @@ class VehicleBooking extends Model
         'updated_by',
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at', 'created_by', 'updated_by',
+    ];
+
+    protected $cast = [
+        'estimation_start_date' => 'datetime',
+        'actual_start_date' => 'datetime',
+        'estimation_completion_date' => 'datetime',
+        'actual_completion_date' => 'datetime',
+    ];
+
     public function vehicle(): BelongsTo
     {
         return $this->belongsTo(Vehicle::class);
