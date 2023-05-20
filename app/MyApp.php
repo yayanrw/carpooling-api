@@ -142,4 +142,5 @@ class MyApp
     const DELETED_SUCCESSFULLY = 'Deleted successfully';
     const INSERTED_SUCCESSFULLY = 'Inserted successfully';
     const UPDATED_SUCCESSFULLY = 'Updated successfully';
+    const REQUESTED = 'requested';
 }
