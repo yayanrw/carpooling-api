@@ -16,6 +16,8 @@ class ApprovalRequestController extends Controller
     public function __construct()
     {
         $this->middleware('ability:super_admin,admin')->only(['store', 'update']);
+        $this->middleware('ability:admin')->only(['store']);
+        $this->middleware('ability:approver')->only(['update']);
     }
 
     public function index()
