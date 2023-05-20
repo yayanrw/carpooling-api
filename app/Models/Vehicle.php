@@ -52,4 +52,9 @@ class Vehicle extends Model
     {
         return $this->hasMany(ServiceSchedule::class);
     }
+
+    public function vehicleBookings(): HasMany
+    {
+        return $this->hasMany(VehicleBooking::class);
+    }
 }
