@@ -13,6 +13,13 @@ class CompanyController extends Controller
 {
     use HttpResponses;
 
+
+    public function __construct()
+    {
+        $this->middleware('ability:super_admin,admin')->only(['store', 'update', 'destroy']);
+    }
+
+
     public function index()
     {
         try {
