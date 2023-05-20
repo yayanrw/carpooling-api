@@ -8,12 +8,16 @@ use App\Models\ServiceSchedule;
 use App\MyApp;
 use App\Traits\HttpResponses;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ServiceScheduleController extends Controller
 {
     use HttpResponses;
+
+    public function __construct()
+    {
+        $this->middleware('ability:super_admin,admin')->only(['store', 'update']);
+    }
 
     public function index()
     {
