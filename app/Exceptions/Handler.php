@@ -2,10 +2,13 @@
 
 namespace App\Exceptions;
 
+use App\MyApp;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Laravel\Sanctum\Exceptions\MissingAbilityException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Handler extends ExceptionHandler
 {
@@ -52,17 +55,29 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof ModelNotFoundException) {
+            return response()->json([
+                'status' => false,
+                'message' => MyApp::DATA_NOT_FOUND,
+            ], MyApp::HTTP_NOT_FOUND);
+        }
+        if ($exception instanceof AuthenticationException) {
+            return response()->json([
+                'status' => false,
+                'message' => MyApp::UNAUTHENTICATED,
+            ], MyApp::HTTP_UNAUTHORIZED);
+        }
         if ($exception instanceof MissingAbilityException) {
             return response()->json([
                 'status' => false,
-                'message' => 'Unauthorized access',
-            ], 403);
+                'message' => MyApp::ACCESS_DENIED,
+            ], MyApp::HTTP_FORBIDDEN);
         }
         if ($exception instanceof NotFoundHttpException) {
             return response()->json([
                 'status' => false,
-                'message' => 'Page not found',
-            ], 404);
+                'message' => MyApp::PAGE_NOT_FOUND,
+            ], MyApp::HTTP_NOT_FOUND);
         }
         return parent::render($request, $exception);
     }
