@@ -47,37 +47,25 @@ class ApprovalRequestController extends Controller
         }
     }
 
-    public function show(int $id)
+    public function show(ApprovalRequest $approvalRequest)
     {
         try {
-            $approvalRequest = ApprovalRequest::find($id);
-
-            if (!empty($approvalRequest)) {
-                return $this->success($approvalRequest);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success($approvalRequest);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
-    public function update(UpdateApprovalRequest $updateApprovalRequest, int $id)
+    public function update(UpdateApprovalRequest $updateApprovalRequest, ApprovalRequest $approvalRequest)
     {
         try {
-            $approvalRequest = ApprovalRequest::find($id);
+            $approvalRequest->note = $updateApprovalRequest->note;
+            $approvalRequest->is_approved = $updateApprovalRequest->is_approved;
+            $approvalRequest->approved_at = date('Y-m-d H:i:s');
 
-            if (!empty($approvalRequest)) {
-                $approvalRequest->note = $updateApprovalRequest->note;
-                $approvalRequest->is_approved = $updateApprovalRequest->is_approved;
-                $approvalRequest->approved_at = date('Y-m-d H:i:s');
+            $approvalRequest->save();
 
-                $approvalRequest->save();
-
-                return $this->success($approvalRequest, MyApp::UPDATED_SUCCESSFULLY);
-            } else {
-                return $this->error(null, MyApp::DATA_NOT_FOUND, MyApp::HTTP_NO_CONTENT);
-            }
+            return $this->success($approvalRequest, MyApp::UPDATED_SUCCESSFULLY);
         } catch (Exception $e) {
             return $this->error(null, $e->getMessage(), MyApp::HTTP_INTERNAL_SERVER_ERROR);
         }
