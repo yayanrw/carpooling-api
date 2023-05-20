@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'SUPERADMIN',
             'email' => 'superadmin@example.com',
             'password' => Hash::make("Bismillah."),
-            'role' => 'superadmin',
+            'role' => 'super_admin',
         ]);
 
         \App\Models\User::factory()->create([
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'ENDUSER',
             'email' => 'enduser@example.com',
             'password' => Hash::make("Bismillah."),
-            'role' => 'enduser',
+            'role' => 'end_user',
         ]);
     }
 }
