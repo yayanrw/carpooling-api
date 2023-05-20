@@ -36,6 +36,7 @@ class VehicleBookingController extends Controller
                 'estimation_start_date' => $storeVehicleBookingRequest->estimation_start_date,
                 'estimation_completion_date' => $storeVehicleBookingRequest->estimation_completion_date,
                 'neccesary' => $storeVehicleBookingRequest->neccesary,
+                'status' => MyApp::REQUESTED,
                 'created_by' => Auth::user()->id,
             ]);
 
