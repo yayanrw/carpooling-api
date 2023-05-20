@@ -17,6 +17,10 @@ class Office extends Model
         'company_id', 'office_name', 'region', 'type', 'created_by', 'updated_by', 'deleted_by',
     ];
 
+    protected $hidden = [
+        'created_at', 'updated_at', 'deleted_at', 'created_by', 'updated_by', 'deleted_by',
+    ];
+
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
