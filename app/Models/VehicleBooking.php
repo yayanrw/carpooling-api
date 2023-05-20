@@ -23,6 +23,7 @@ class VehicleBooking extends Model
         'necessary',
         'status',
         'created_by',
+        'updated_by',
     ];
 
     public function vehicle(): BelongsTo
@@ -40,6 +41,11 @@ class VehicleBooking extends Model
     }
 
     public function createdBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
