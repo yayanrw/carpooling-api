@@ -41,21 +41,21 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/approval-requests', [ApprovalRequestController::class, 'store']);
     Route::put('/approval-requests/{approvalRequest}', [ApprovalRequestController::class, 'update']);
 
-    Route::get('/company', [CompanyController::class, 'index']);
-    Route::get('/company/{company}', [CompanyController::class, 'show']);
-    Route::post('/company', [CompanyController::class, 'store']);
-    Route::put('/company/{company}', [CompanyController::class, 'update']);
-    Route::delete('/company/{company}', [CompanyController::class, 'destroy']);
+    Route::get('/companies', [CompanyController::class, 'index']);
+    Route::get('/companies/{company}', [CompanyController::class, 'show']);
+    Route::post('/companies', [CompanyController::class, 'store']);
+    Route::put('/companies/{company}', [CompanyController::class, 'update']);
+    Route::delete('/companies/{company}', [CompanyController::class, 'destroy']);
 
     Route::get('/fuel-consumptions', [FuelConsumptionController::class, 'index']);
     Route::get('/fuel-consumptions/{fuelConsumption}', [FuelConsumptionController::class, 'show']);
     Route::post('/fuel-consumptions', [FuelConsumptionController::class, 'store']);
 
-    Route::get('/office', [OfficeController::class, 'index']);
-    Route::get('/office/{office}', [OfficeController::class, 'show']);
-    Route::post('/office', [OfficeController::class, 'store']);
-    Route::put('/office/{office}', [OfficeController::class, 'update']);
-    Route::delete('/office/{office}', [OfficeController::class, 'destroy']);
+    Route::get('/offices', [OfficeController::class, 'index']);
+    Route::get('/offices/{office}', [OfficeController::class, 'show']);
+    Route::post('/offices', [OfficeController::class, 'store']);
+    Route::put('/offices/{office}', [OfficeController::class, 'update']);
+    Route::delete('/offices/{office}', [OfficeController::class, 'destroy']);
 
     Route::get('/service-schedules', [ServiceScheduleController::class, 'index']);
     Route::get('/service-schedules/{serviceSchedule}', [ServiceScheduleController::class, 'show']);
@@ -67,9 +67,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/vehicle-bookings', [VehicleBookingController::class, 'store']);
     Route::put('/vehicle-bookings/{vehicleBooking}', [VehicleBookingController::class, 'update']);
 
-    Route::get('/vehicle', [VehicleController::class, 'index']);
-    Route::get('/vehicle/{vehicle}', [VehicleController::class, 'show']);
-    Route::post('/vehicle', [VehicleController::class, 'store']);
-    Route::put('/vehicle/{vehicle}', [VehicleController::class, 'update']);
-    Route::delete('/vehicle/{vehicle}', [VehicleController::class, 'destroy']);
+    Route::get('/vehicles', [VehicleController::class, 'index']);
+    Route::get('/vehicles/{vehicle}', [VehicleController::class, 'show']);
+    Route::post('/vehicles', [VehicleController::class, 'store']);
+    Route::put('/vehicles/{vehicle}', [VehicleController::class, 'update']);
+    Route::delete('/vehicles/{vehicle}', [VehicleController::class, 'destroy']);
 });
